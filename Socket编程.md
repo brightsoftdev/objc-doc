@@ -16,6 +16,10 @@
 * 六.使用流
 
 
+>注:文档中设计的代码也都在本人github目录下，分别为socketServer和socketClient.对应着各个分支。
+>![分支][img-branches]
+
+[img-branches]: img/socket_branches.png  class="shadow"
 ---
 
 ###一.Socket简介   
