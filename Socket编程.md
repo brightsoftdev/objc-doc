@@ -17,7 +17,7 @@
 
 
 >注:文档中设计的代码也都在本人github目录下，分别为socketServer和socketClient.对应着各个分支。
->![分支](img/socket_branches.png)
+>![分支](img/socket_branches.png?raw=true)
 
 ---
 
@@ -33,7 +33,7 @@
 
 
 在Mac系统中，可以通过Activity Monitor来查看某个进程打开的文件和端口。
-![已打开文件](img/openedfiles.png)
+![已打开文件](img/openedfiles.png?raw=true)
 
 UNIX内核加入TCP/IP协议的时候，便在系统中引入了一种新的IO操作，只不过由于网络连接的不可靠性，所以网络IO比本地设备的IO复杂很多。这一系列的接口叫做BSD Socket API,当初由伯克利大学研发，最终成为网络开发接口的标准。
 网络通信从本质上讲也是进程间通信，只是这两个进程一般在网络中不同计算机上。当然Socket API其实也提供了专门用于本地IPC的使用方式：UNIX Domain Socket，这个这里就不细说了。本文所讲的Socket如无例外，均是说的Internet Socket。
@@ -235,10 +235,10 @@ TCP/IP 各层协议将字节序使用的是大端序，我们把TCP/IP协议中�
 上面的服务器端和客户端连接成功之后打开的端口的情况是怎么样的呢？
 
 * 服务器端 ,存在一个用于listen的半相关的socket，一个用于和客户端进行通信的全相关的socket
-![服务器端进程打开文件](img/socket_server_opened_files.png)
+![服务器端进程打开文件](img/socket_server_opened_files.png?raw=true)
 
 * 客户端 存在一个用于和服务器端进行通信的全相关的socket
-![客户端进程打开文件](img/socket_client_opened_files.png)
+![客户端进程打开文件](img/socket_client_opened_files.png?raw=true)
 
 由于accept只运行了一次，所以服务器端一次只能和一个客户端进行通信，且使用的send和recv方法都是阻塞的，所以上面这个例子存在一个问题就是服务器端客户端连接成功之后，发送，接受，发送，接受的次序就被固定了。比如服务器端发送消息之后就等客户端发送消息了，没有接受到客户端的消息之前服务器端是没有办法发送消息的。使用select这个这个系统调用可以解决上面的问题。
 
